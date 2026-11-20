@@ -1,0 +1,14 @@
+{
+  "sympy_dH_dt_zero": true,
+  "z3_assumptions_non_vacuous": true,
+  "z3_strict_positivity_unsat": true,
+  "z3_amplitude_bounds_unsat": true,
+  "z3_negative_control_counterexample_found": true,
+  "negative_control_witness": {
+    "omega": "1",
+    "lambda": "-1",
+    "q": "-2",
+    "p": "0"
+  },
+  "all_passed": true
+}

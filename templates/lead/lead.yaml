@@ -1,0 +1,39 @@
+id: "{{LEAD_ID}}"
+project: "{{PROJECT_ID}}"
+title: "{{LEAD_TITLE}}"
+kind: "{{LEAD_KIND}}" # numerical | symbolic | formal | hybrid | theoretical
+status: "exploring"   # exploring | planned | running | verified | confirmed | falsified | inconclusive | parked
+created_at: "{{CREATED_AT}}"
+
+idea: |
+  Describe the raw researcher idea or conjecture in 2-4 sentences.
+
+mathematical_formulation: |
+  State the governing equations, objects, spaces, theorems, or definitions precisely (LaTeX welcome).
+
+assumptions:
+  - "List every explicit mathematical or physical assumption (e.g., boundary conditions, smoothness, units, regime)."
+
+success_criteria:
+  - "What concrete quantitative or formal result confirms this lead?"
+
+falsification_criteria:
+  - "What concrete result refutes or rules out this lead?"
+
+artifacts_planned:
+  - "notes/01_background.md"
+  - "work/..."
+
+verification:
+  pytest: true
+  lean_files: []
+  checks: []
+  # Example check entry:
+  # - name: "physics-invariants"
+  #   command: ["python", "work/verify_physics.py"]
+  #   timeout_sec: 120
+
+links:
+  parent_lead: null
+  follow_up_leads: []
+  references: []

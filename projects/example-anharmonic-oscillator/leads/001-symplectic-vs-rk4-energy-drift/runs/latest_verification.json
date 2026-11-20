@@ -1,0 +1,32 @@
+{
+  "lead_id": "001-symplectic-vs-rk4-energy-drift",
+  "project_id": "example-anharmonic-oscillator",
+  "checked_at": "2026-11-20T14:39:44Z",
+  "passed": true,
+  "outcomes": [
+    {
+      "name": "lead-schema",
+      "kind": "schema",
+      "status": "passed",
+      "duration_sec": 0.0,
+      "message": "lead.yaml conforms to LeadSpec schema.",
+      "details": {}
+    },
+    {
+      "name": "pytest",
+      "kind": "pytest",
+      "status": "passed",
+      "duration_sec": 1.7296,
+      "message": "...                                                                      [100%]",
+      "details": {}
+    },
+    {
+      "name": "physics-invariants-and-convergence",
+      "kind": "custom",
+      "status": "passed",
+      "duration_sec": 2.2412,
+      "message": "[\n  {\n    \"name\": \"harmonic_analytic_limit\",\n    \"passed\": true,\n    \"message\": \"max_abs_err=2.860e-05, max_rel_err=2.383e-05\",\n    \"metrics\": {\n      \"max_abs_err\": 2.8599247525934457e-05,\n      \"max_rel_err\": 2.3832706271612047e-05\n    }\n  },\n  {\n    \"name\": \"verlet_order\",\n    \"passed\": true,\n    \"message\": \"measured_order=2.000 vs expected=2.000 (tol=\\u00b10.150)\",\n    \"metrics\": {\n      \"measured_order\": 2.0002,\n      \"expected_order\": 2.0,\n      \"pairwise_orders\": [\n        1.998,\n        2.0001,\n        2.0026\n      ]\n    }\n  },\n  {\n    \"name\": \"rk4_order\",\n    \"passed\": true,\n    \"message\": \"measured_order=4.076 vs expected=4.000 (tol=\\u00b10.200)\",\n    \"metrics\": {\n      \"measured_order\": 4.076,\n      \"expected_order\": 4.0,\n      \"pairwise_orders\": [\n        4.099,\n        4.0797,\n        4.0481\n      ]\n    }\n  },\n  {\n    \"name\": \"verlet_bounded_energy\",\n    \"passed\": true,\n    \"message\": \"max_abs_drift=4.744e-03, max_rel_drift=1.948e-03 (rtol=2.0e-03, atol=1.0e-08)\",\n    \"met",
+      "details": {}
+    }
+  ]
+}

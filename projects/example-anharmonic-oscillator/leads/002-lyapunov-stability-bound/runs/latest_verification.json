@@ -1,0 +1,48 @@
+{
+  "lead_id": "002-lyapunov-stability-bound",
+  "project_id": "example-anharmonic-oscillator",
+  "checked_at": "2026-11-20T14:39:51Z",
+  "passed": true,
+  "outcomes": [
+    {
+      "name": "lead-schema",
+      "kind": "schema",
+      "status": "passed",
+      "duration_sec": 0.0,
+      "message": "lead.yaml conforms to LeadSpec schema.",
+      "details": {}
+    },
+    {
+      "name": "pytest",
+      "kind": "pytest",
+      "status": "passed",
+      "duration_sec": 1.9787,
+      "message": ".                                                                        [100%]",
+      "details": {}
+    },
+    {
+      "name": "sympy-and-z3-formal-proof",
+      "kind": "custom",
+      "status": "passed",
+      "duration_sec": 1.492,
+      "message": "{\n  \"sympy_dH_dt_zero\": true,\n  \"z3_assumptions_non_vacuous\": true,\n  \"z3_strict_positivity_unsat\": true,\n  \"z3_amplitude_bounds_unsat\": true,\n  \"z3_negative_control_counterexample_found\": true,\n  \"negative_control_witness\": {\n    \"omega\": \"1\",\n    \"lambda\": \"-1\",\n    \"q\": \"-2\",\n    \"p\": \"0\"\n  },\n  \"all_passed\": true\n}",
+      "details": {}
+    },
+    {
+      "name": "lean-audit:Stability.lean",
+      "kind": "lean_audit",
+      "status": "passed",
+      "duration_sec": 0.0,
+      "message": "No sorry/admit/axiom/native_decide escapes found.",
+      "details": {}
+    },
+    {
+      "name": "lean-compile:Stability.lean",
+      "kind": "lean_compile",
+      "status": "skipped",
+      "duration_sec": 0.0,
+      "message": "Lean 4 (`lean`) not found on PATH. Install Lean via elan to run kernel compilation.",
+      "details": {}
+    }
+  ]
+}

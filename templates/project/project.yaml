@@ -1,0 +1,7 @@
+id: "{{PROJECT_ID}}"
+title: "{{PROJECT_TITLE}}"
+summary: "{{PROJECT_SUMMARY}}"
+domain: "physics-math"
+status: "active"
+created_at: "{{CREATED_AT}}"
+tags: []

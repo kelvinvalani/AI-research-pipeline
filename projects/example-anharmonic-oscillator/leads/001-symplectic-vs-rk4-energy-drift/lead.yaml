@@ -1,0 +1,60 @@
+id: 001-symplectic-vs-rk4-energy-drift
+project: example-anharmonic-oscillator
+title: Symplectic Verlet vs. RK4 Long-Time Energy Drift
+kind: hybrid
+status: confirmed
+created_at: '2026-11-21T00:00:00Z'
+idea: 'Compare long-time energy conservation of 2nd-order symplectic Velocity Verlet
+  against
+
+  classical 4th-order Runge-Kutta (RK4) on the undamped quartic anharmonic oscillator.
+
+  Verify that Verlet exhibits bounded oscillatory energy error with no secular drift,
+
+  while RK4 exhibits monotonic secular energy loss at moderate step size.
+
+  '
+mathematical_formulation: 'Dimensionless Hamiltonian ($m = 1$):
+
+  $$H(q, p) = \frac{1}{2} p^2 + \frac{1}{2} \omega^2 q^2 + \frac{1}{4} \lambda q^4,
+  \qquad \omega > 0,\ \lambda > 0.$$
+
+  Equations of motion: $\dot{q} = p$, $\dot{p} = -\omega^2 q - \lambda q^3$.
+
+  '
+assumptions:
+- Undamped 1D classical Hamiltonian system with mass m = 1.
+- Parameters omega = 1.0, lambda = 1.0, initial condition (q0, p0) = (1.5, 0.0).
+- Step size h = 0.25 over horizon T = 500.0 (below Verlet linear stability threshold).
+success_criteria:
+- 'Velocity Verlet shows no secular drift: late-time max energy error stays within
+  1.5x of early-time max error.'
+- RK4 exhibits strictly monotonic secular energy drift whose final magnitude exceeds
+  Verlet's max energy error by > 2x at h = 0.25, T = 500.
+- All independent verification checks (analytic harmonic limit, convergence orders
+  2 and 4, time-reversal symmetry, SymPy Hamilton equations) pass.
+falsification_criteria:
+- Velocity Verlet displays secular energy growth exceeding 2x its early-time oscillation
+  envelope.
+- Measured convergence orders deviate from 2 (Verlet) or 4 (RK4) by more than 0.25.
+artifacts_planned:
+- notes/01_background.md
+- work/simulate.py
+- work/verify_physics.py
+- work/test_oscillator.py
+verification:
+  pytest: true
+  lean_files: []
+  checks:
+  - name: physics-invariants-and-convergence
+    command:
+    - python
+    - work/verify_physics.py
+    timeout_sec: 120
+links:
+  parent_lead: null
+  follow_up_leads:
+  - 002-lyapunov-stability-bound
+  references:
+  - Hairer, Lubich, Wanner — Geometric Numerical Integration (standard reference for
+    backward error analysis of symplectic integrators).

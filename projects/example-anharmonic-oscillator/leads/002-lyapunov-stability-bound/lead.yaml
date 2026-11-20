@@ -1,0 +1,57 @@
+id: 002-lyapunov-stability-bound
+project: example-anharmonic-oscillator
+title: Global Lyapunov Positivity & Phase-Space Bounds
+kind: formal
+status: confirmed
+created_at: '2026-11-21T00:00:00Z'
+idea: 'Formally verify that for all omega > 0 and lambda > 0, the quartic oscillator
+
+  Hamiltonian H(q, p) is a strict global Lyapunov function with exact phase-space
+
+  bounds |q| <= sqrt(2 E0) / omega and |p| <= sqrt(2 E0), and verify that dropping
+
+  lambda > 0 (allowing lambda < 0) breaks positivity via an explicit Z3 counterexample.
+
+  '
+mathematical_formulation: 'For all $\omega > 0, \lambda > 0$ and $(q, p) \in \mathbb{R}^2$:
+
+  1. $H(0, 0) = 0$ and $(q, p) \neq (0, 0) \implies H(q, p) > 0$.
+
+  2. $\dot{H} = \{H, H\} = 0$ along Hamiltonian trajectories.
+
+  3. $H(q, p) \le E_0 \implies \omega^2 q^2 \le 2 E_0 \land p^2 \le 2 E_0$.
+
+  '
+assumptions:
+- All variables (q, p, omega, lambda, E0) range over the real numbers R.
+- Coupling parameters satisfy omega > 0 and lambda > 0.
+success_criteria:
+- Z3 proves non-vacuity of assumptions (sat) and proves strict positivity and both
+  phase-space bounds (unsat on negated goals).
+- Z3 finds a verified counterexample when lambda < 0 (negative control).
+- SymPy verifies exact algebraic identity dH/dt = 0.
+- Lean 4 counterpart Stability.lean passes zero-sorry / clean-axiom static audit (and
+  compiles cleanly when Lean 4 is installed).
+falsification_criteria:
+- Z3 returns sat (counterexample) for any claimed inequality under omega > 0, lambda
+  > 0.
+- Lean 4 static audit detects sorry/admit/custom axioms or kernel check fails.
+artifacts_planned:
+- notes/01_background.md
+- work/prove_stability.py
+- work/Stability.lean
+- work/test_stability.py
+verification:
+  pytest: true
+  lean_files:
+  - work/Stability.lean
+  checks:
+  - name: sympy-and-z3-formal-proof
+    command:
+    - python
+    - work/prove_stability.py
+    timeout_sec: 120
+links:
+  parent_lead: 001-symplectic-vs-rk4-energy-drift
+  follow_up_leads: []
+  references: []

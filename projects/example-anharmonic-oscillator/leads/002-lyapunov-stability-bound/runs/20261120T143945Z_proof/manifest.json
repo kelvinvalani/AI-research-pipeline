@@ -1,0 +1,36 @@
+{
+  "run_id": "20261120T143945Z_proof",
+  "lead_id": "002-lyapunov-stability-bound",
+  "project_id": "example-anharmonic-oscillator",
+  "tag": "proof",
+  "command": [
+    "python",
+    "work/prove_stability.py"
+  ],
+  "seed": 42,
+  "executor": "local",
+  "started_at": "2026-11-20T14:39:45Z",
+  "finished_at": "2026-11-20T14:39:47Z",
+  "duration_sec": 1.7945,
+  "exit_code": 0,
+  "timed_out": false,
+  "git_sha": null,
+  "git_dirty": true,
+  "python_version": "3.11.15",
+  "run_dir": "runs/20261120T143945Z_proof",
+  "summary_file": "summary.json",
+  "summary": {
+    "sympy_dH_dt_zero": true,
+    "z3_assumptions_non_vacuous": true,
+    "z3_strict_positivity_unsat": true,
+    "z3_amplitude_bounds_unsat": true,
+    "z3_negative_control_counterexample_found": true,
+    "negative_control_witness": {
+      "omega": "1",
+      "lambda": "-1",
+      "q": "-2",
+      "p": "0"
+    },
+    "all_passed": true
+  }
+}

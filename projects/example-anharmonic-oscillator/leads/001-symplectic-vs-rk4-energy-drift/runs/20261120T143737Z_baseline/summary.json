@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "omega": 1.0,
+    "lambda": 1.0,
+    "q0": 1.5,
+    "p0": 0.0,
+    "dt": 0.25,
+    "T": 500.0
+  },
+  "initial_energy": 2.390625,
+  "verlet_early_max_err": 0.1227085,
+  "verlet_late_max_err": 0.12270701,
+  "verlet_late_to_early_ratio": 1.0,
+  "verlet_overall_max_err": 0.12270889,
+  "rk4_final_err": 0.71731422,
+  "rk4_overall_max_err": 0.71781492,
+  "rk4_to_verlet_final_ratio": 5.8457,
+  "figure": "energy_drift.png"
+}
