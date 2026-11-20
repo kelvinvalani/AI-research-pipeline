@@ -8,6 +8,7 @@ from typing import Any
 
 import yaml
 
+from rpipe.refs import list_inbox_files
 from rpipe.schemas import LeadKind, LeadSpec, LeadStatus, ProjectMeta, utc_now_iso
 
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*$")
@@ -62,8 +63,11 @@ def init_project(
     }
 
     (project_dir / "leads").mkdir(parents=True, exist_ok=True)
-    for rel in ("project.yaml", "README.md"):
+    (project_dir / "refs").mkdir(parents=True, exist_ok=True)
+    for rel in ("project.yaml", "README.md", "refs/README.md"):
         src = template_dir / rel
+        dst = project_dir / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
         if src.exists():
             content = _render_template(src.read_text(encoding="utf-8"), replacements)
         elif rel == "project.yaml":
@@ -71,9 +75,11 @@ def init_project(
                 id=project_id, title=title, summary=summary, created_at=created_at
             )
             content = yaml.safe_dump(meta.model_dump(), sort_keys=False)
+        elif rel == "refs/README.md":
+            content = f"# Project References (`refs/`)\n\nShared papers and files for {title}.\n"
         else:
             content = f"# {title}\n\n> {summary}\n"
-        (project_dir / rel).write_text(content, encoding="utf-8")
+        dst.write_text(content, encoding="utf-8")
 
     return project_dir
 
@@ -246,4 +252,8 @@ def workspace_status(
                 }
             )
 
-    return {"repo_root": str(root.as_posix()), "projects": projects_out}
+    return {
+        "repo_root": str(root.as_posix()),
+        "inbox_files": list_inbox_files(root),
+        "projects": projects_out,
+    }

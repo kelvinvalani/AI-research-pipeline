@@ -6,7 +6,10 @@ import argparse
 import json
 import sys
 from collections.abc import Sequence
+from pathlib import Path
 
+from rpipe.doctor import run_doctor
+from rpipe.refs import inspect_reference
 from rpipe.runner import run_in_lead
 from rpipe.schemas import LeadKind, LeadStatus
 from rpipe.verify import verify_lead
@@ -20,6 +23,12 @@ from rpipe.workspace import (
 
 
 def _print_status_human(data: dict) -> None:
+    inbox_files = data.get("inbox_files", [])
+    if inbox_files:
+        print("Inbox (unfiled reference files):")
+        for f in inbox_files:
+            print(f"  - {f}")
+
     projects = data.get("projects", [])
     if not projects:
         print("No projects found. Start one with: rpipe init-project <slug> --title '...'")
@@ -97,6 +106,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="Fail if declared .lean files cannot compile because `lean` is absent.",
     )
     p_ver.add_argument("--json", action="store_true", help="Emit report JSON.")
+
+    # inspect-ref
+    p_ref = sub.add_parser(
+        "inspect-ref",
+        help="Extract LLM-readable text/metadata from PDFs, notebooks, LaTeX, or text references.",
+    )
+    p_ref.add_argument("path", help="Path to reference file (e.g. inbox/paper.pdf).")
+    p_ref.add_argument(
+        "--pages",
+        default=None,
+        help="1-indexed PDF page range (e.g. '1-5' or '2,6-8'). Defaults to first 5 pages.",
+    )
+    p_ref.add_argument(
+        "--max-chars",
+        type=int,
+        default=20000,
+        help="Maximum characters to return.",
+    )
+    p_ref.add_argument("--json", action="store_true", help="Emit structured JSON.")
+
+    # doctor
+    p_doc = sub.add_parser(
+        "doctor",
+        help="Check Python, uv, math/physics packages, and optional toolchains.",
+    )
+    p_doc.add_argument("--json", action="store_true", help="Emit structured JSON.")
 
     return parser
 
@@ -210,6 +245,48 @@ def main(argv: Sequence[str] | None = None) -> int:
                     f"({outcome.kind}, {outcome.duration_sec}s): {first_line}"
                 )
         return 0 if report.passed else 1
+
+    if args.subcommand == "inspect-ref":
+        info = inspect_reference(
+            Path(args.path),
+            pages=args.pages,
+            max_chars=args.max_chars,
+        )
+        if args.json:
+            print(json.dumps(info, indent=2, ensure_ascii=False))
+        else:
+            print(f"[{info['kind']}] {info['path']} ({info['size_bytes']} bytes)")
+            for note in info.get("notes", []):
+                print(f"Note: {note}")
+            content = info.get("content")
+            if isinstance(content, list):
+                for item in content:
+                    if "page" in item:
+                        print(f"\n--- Page {item['page']} ---\n{item['text']}")
+                    elif "cell" in item:
+                        header = f"\n--- Cell {item['cell']} ({item['cell_type']}) ---\n"
+                        print(f"{header}{item['source']}")
+            elif isinstance(content, str):
+                print(f"\n{content}")
+        return 0
+
+    if args.subcommand == "doctor":
+        report_doc = run_doctor()
+        if args.json:
+            print(json.dumps(report_doc, indent=2))
+        else:
+            badge = "READY" if report_doc["ready"] else "NEEDS SETUP"
+            print(f"Environment Status: [{badge}]")
+            for chk in report_doc["checks"]:
+                tag = (
+                    "OK  "
+                    if chk["status"] == "ok"
+                    else ("OPT " if chk["status"] == "optional_missing" else "MISS")
+                )
+                print(f"  [{tag}] {chk['name']:14s} — {chk['detail']}")
+            if not report_doc["ready"]:
+                print("\nFix missing items by running: .\\setup.ps1 (or `uv sync --extra all`)")
+        return 0 if report_doc["ready"] else 1
 
     return 2
 

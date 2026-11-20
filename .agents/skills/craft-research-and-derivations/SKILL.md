@@ -30,7 +30,15 @@ Load this skill whenever researching background context, writing `notes/*.md`, o
    - Check limiting cases ($a \to 0$, $d = 1$, linear limit) immediately on derived expressions.
    - For non-trivial algebraic manipulations (more than ~5 lines of expansion, commutators, or index contractions), verify the result in SymPy (`craft-symbolic-math`) rather than trusting manual algebra alone.
 
-5. **Artifact Hygiene**
+5. **Working with Reference Papers & Dropped Files (`inbox/` & `projects/<project>/refs/`)**
+   - Always extract a concise **Reference Digest** into `notes/01_background.md` (or `notes/00_ref_<slug>.md`) listing the paper's exact sign conventions, normalizations, assumptions, and equation numbers (e.g. `Eq. (14)`). Never rely on vague paraphrases of dense equations.
+   - **Math PDF extraction warning**: Plain-text PDF extraction (`rpipe inspect-ref`) can drop subscripts, superscripts, Greek letters, or minus signs in complex equations. Whenever an equation looks garbled or critical:
+     1. Inspect the PDF page visually with a multimodal viewer if available; OR
+     2. If the paper is from arXiv and `.tex` source is available/provided, prefer reading the `.tex` file directly for 100% lossless LaTeX; OR
+     3. Explicitly flag any uncertain symbols to the researcher at the Stage 1 checkpoint before coding.
+   - Never modify original reference files inside `refs/`; treat `refs/` as read-only source material.
+
+6. **Artifact Hygiene**
    - Keep `notes/` ordered sequentially (`01_background.md`, `02_perturbation_derivation.md`, etc.).
    - Use standard LaTeX math (`$...$` inline, `$$...$$` display).
    - Separate *established facts*, *heuristic arguments*, and *open conjectures* visually so future turns never confuse a guess for a proved lemma.
