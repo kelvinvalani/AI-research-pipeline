@@ -1,0 +1,126 @@
+id: 001-harmonic-alpha-sigma-statistics
+project: lorenz-active-particle
+title: 'Harmonic Lorenz Active Particle: Alpha-Sigma Statistics'
+kind: hybrid
+status: running
+created_at: '2026-11-24T15:36:44Z'
+idea: 'Formulate a deterministic one-dimensional active particle whose constant-speed
+
+  propulsion reverses when a Lorenz trajectory crosses X=0. In a harmonic trap,
+
+  calculate the stationary, relaxation, and first-passage statistics studied for
+
+  the stochastic one-dimensional run-and-tumble particle, while sweeping the trap
+
+  strength alpha and Lorenz parameter sigma. Test whether the RTP formulas remain
+
+  approximately valid after replacing the Poisson rate gamma by the measured mean
+
+  Lorenz reversal rate gamma_eff(sigma), and quantify every systematic departure.
+
+  '
+mathematical_formulation: "For alpha > 0, sigma > 0, r=28, b=8/3, and u=sqrt(r-1)=3*sqrt(3),\
+  \ study\n\n    dx/dt = -2 alpha x + u sgn(X),\n    dX/dt = sigma (Y-X),\n    dY/dt\
+  \ = r X - Y - X Z,\n    dZ/dt = X Y - b Z.\n\nThe potential is V(x)=alpha*x^2 and\
+  \ mu:=2*alpha is the harmonic restoring\nrate. Statistics are defined with respect\
+  \ to the natural long-time invariant\nmeasure of the Lorenz dynamics: discard a\
+  \ documented burn-in, sample Lorenz\nphases from a long attractor trajectory, and\
+  \ use these phases as the ensemble\nfor particle experiments. The primary sweep\
+  \ is logarithmic over\nsigma in [1,50] and alpha in [0.05,5], with adaptive extra\
+  \ points near changes\nof Lorenz attractor class and near the measured stationary\
+  \ shape boundary.\n\nIf Lorenz reversals occur, define run intervals tau_n between\
+  \ successive X=0\ncrossings and gamma_eff(sigma):=1/E[tau_n]. Also measure the sign\
+  \ correlation\nC_s(t)=E[sgn(X(t0+t))sgn(X(t0))], its integral correlation time,\
+  \ the complete\nrun-time law, and serial run correlations. Do not assume the Lorenz\
+  \ sign process\nis Markovian.\n\nFor every alpha, the deterministic particle has\
+  \ the absorbing forward-invariant\ninterval [-x_plus,x_plus], x_plus=u/(2*alpha).\
+  \ Compute the invariant density\nP(x), conditional densities P_+(x), P_-(x), moments,\
+  \ edge behavior, modality,\nand the shape-transition curve alpha_c(sigma). Compute\
+  \ P(x,t), moment relaxation,\nand distributional relaxation from x0=0 and from x0=x_plus/2.\
+  \ For first passage,\nstart at x0=x_plus/2, absorb at x=0, and compute Q_+(t), Q_-(t),\
+  \ their symmetric\naverage, the first-passage density, mean/quantiles, and the long-time\
+  \ decay rate.\n\nCompare against the harmonic RTP predictions with v0=u, mu=2*alpha,\
+  \ and\ngamma=gamma_eff(sigma): support [-u/mu,u/mu], stationary density proportional\n\
+  to [1-(mu*x/u)^2]^(gamma/mu-1), shape boundary alpha_c=gamma/2,\ngeneric relaxation\
+  \ rate mu, origin-start relaxation rate min(mu+2*gamma,2*mu),\nand the paper's hypergeometric\
+  \ first-passage exponent. Where reversals cease or\nthe Lorenz attractor is nonmixing,\
+  \ classify the deterministic attractor and report\nthe resulting degenerate or periodic\
+  \ particle statistics instead of forcing an\nRTP comparison.\n"
+assumptions:
+- The model is deterministic, overdamped, one-dimensional, and dimensionless; Lorenz
+  time is the time unit.
+- The propulsion has constant magnitude u=3*sqrt(3), independent of sigma; only its
+  sign is taken from X(t).
+- The Lorenz parameters r=28 and b=8/3 are fixed while sigma is varied over [1,50].
+- The harmonic potential is V(x)=alpha*x^2 with alpha in [0.05,5], so mu=2*alpha.
+- sgn(X) changes only at resolved X=0 crossings; isolated numerical values X=0 use
+  the sign obtained by event direction/continuation.
+- Probability means an ensemble over the natural invariant Lorenz measure, approximated
+  by post-burn-in phase samples.
+- Stationary sampling uses post-transient particle trajectories; relaxation uses x0=0
+  and x0=x_plus/2; first passage uses x0=x_plus/2 and absorption at x=0.
+- Attractor class and ergodicity/mixing diagnostics are checked before interpreting
+  ensemble statistics.
+- RTP formulas with gamma_eff are a falsifiable approximation, not an exact closure
+  for the correlated Lorenz sign process.
+success_criteria:
+- Produce a reproducible alpha-sigma atlas of Lorenz attractor class, gamma_eff, run-time
+  law, sign correlation, stationary density, moments, and modality.
+- Locate alpha_c(sigma), with uncertainty, wherever a stationary shape boundary exists
+  and compare it with gamma_eff(sigma)/2.
+- Compute converged time-dependent densities and relaxation rates for x0=0 and x0=x_plus/2.
+- Compute converged survival curves, first-passage distributions, mean/quantiles,
+  and tail rates from x0=x_plus/2.
+- Stationary moments and effective rates agree within 2% under timestep, burn-in,
+  trajectory-length, and ensemble-size refinement.
+- Relaxation and first-passage exponents agree within 5% under numerical refinement.
+- Every plotted comparison includes uncertainty or convergence evidence and every
+  run emits a compact summary.json.
+falsification_criteria:
+- The conjectured gamma-to-gamma_eff RTP collapse is falsified at a parameter point
+  when the discrepancy exceeds 10% and five estimated standard errors after all declared
+  refinement checks pass.
+- A claimed stationary shape boundary is rejected if modality/edge classification
+  is not stable under binning, density-estimator, timestep, and sample-size refinement.
+- A claimed exponential relaxation or first-passage tail is rejected if competing
+  tail models or local-slope diagnostics show persistent nonexponential behavior outside
+  uncertainty.
+- Any parameter point that fails the 2% moment/rate or 5% exponent convergence gates
+  is reported as unresolved rather than used to support a conclusion.
+- If the Lorenz dynamics is nonreversing, periodic, multistable, or nonmixing, the
+  Poisson-rate comparison is declared inapplicable there rather than assigning a fabricated
+  gamma_eff.
+artifacts_planned:
+- notes/01_background.md
+- notes/02_analytic_derivations.md
+- work/lorenz_signal.py
+- work/harmonic_particle.py
+- work/stationary_statistics.py
+- work/relaxation_statistics.py
+- work/first_passage_statistics.py
+- work/run_alpha_sigma_sweep.py
+- work/verify_statistics.py
+- work/test_harmonic_lorenz.py
+verification:
+  pytest: true
+  lean_files: []
+  checks:
+  - name: scientific-statistics
+    command:
+    - python
+    - work/verify_statistics.py
+    timeout_sec: 1200
+  - name: lead-tests
+    command:
+    - pytest
+    - -q
+    - work/test_harmonic_lorenz.py
+    timeout_sec: 600
+links:
+  parent_lead: null
+  follow_up_leads: []
+  references:
+  - ../../refs/attractor-driven-matter-valani-paganin-2023.pdf (Sec. II Eq. 2; Sec.
+    IV.B.1 Eq. 14 and Fig. 3; Appendix B)
+  - ../../refs/run-and-tumble-confining-potentials-dhar-et-al-2019.pdf (Eqs. 1-4;
+    Sec. II Eqs. 20-22; Sec. III Eqs. 35-61; Sec. IV Eqs. 62-90)

@@ -1,0 +1,106 @@
+{
+  "run_id": "20261125T092934Z",
+  "lead_id": "001-harmonic-alpha-sigma-statistics",
+  "project_id": "lorenz-active-particle",
+  "tag": null,
+  "command": [
+    "python",
+    "work/verify_statistics.py"
+  ],
+  "seed": 42,
+  "executor": "local",
+  "started_at": "2026-11-25T09:29:34Z",
+  "finished_at": "2026-11-25T09:29:42Z",
+  "duration_sec": 7.7747,
+  "exit_code": 1,
+  "timed_out": false,
+  "git_sha": "04a41870037e",
+  "git_dirty": true,
+  "python_version": "3.14.7",
+  "run_dir": "runs/20261125T092934Z",
+  "summary_file": "summary.json",
+  "summary": {
+    "stage": 3,
+    "all_passed": false,
+    "checks": [
+      {
+        "name": "rtp_second_moment_symbolic_numeric",
+        "passed": true,
+        "message": "Matched across 6 sample points (max_abs=1.110e-16).",
+        "metrics": {
+          "n_samples": 6,
+          "max_abs_err": 1.1102230246251565e-16,
+          "max_rel_err": 2.0650148258027908e-16
+        }
+      },
+      {
+        "name": "lorenz_xy_inversion",
+        "passed": true,
+        "message": "max_abs_err=0.000e+00, max_rel_err=0.000e+00",
+        "metrics": {
+          "max_abs_err": 0.0,
+          "max_rel_err": 0.0
+        }
+      },
+      {
+        "name": "constant_sign_exact_filter",
+        "passed": true,
+        "message": "max_abs_err=7.772e-16, max_rel_err=7.777e-16",
+        "metrics": {
+          "max_abs_err": 7.771561172376096e-16,
+          "max_rel_err": 7.776543435001761e-16
+        }
+      },
+      {
+        "name": "forward_invariant_support",
+        "passed": true,
+        "message": "maximum normalized support excess=0.000e+00",
+        "metrics": {
+          "support_excess": 0.0
+        }
+      },
+      {
+        "name": "rtp_first_passage_asymptotic_limits",
+        "passed": false,
+        "message": "small-gamma relerr=1.386e-02, large-gamma abserr=9.998e-01",
+        "metrics": {
+          "theta_small": 0.019722801993503025,
+          "theta_large": 0.00021219447082894882,
+          "small_error": 0.013859900324848795,
+          "large_error": 0.999787805529171
+        }
+      },
+      {
+        "name": "declared_two_percent_refinement_gate",
+        "passed": false,
+        "message": "rate change=11.222%, moment change=7.992%",
+        "metrics": {
+          "rows": [
+            {
+              "dt": 0.04,
+              "gamma_eff": 0.5457994729646122,
+              "second_moment_y": 0.536807869146229
+            },
+            {
+              "dt": 0.02,
+              "gamma_eff": 0.6296271967344512,
+              "second_moment_y": 0.5127706236332399
+            },
+            {
+              "dt": 0.01,
+              "gamma_eff": 0.5660994120032992,
+              "second_moment_y": 0.5573136816766249
+            }
+          ],
+          "rate_relative_change": 0.11222019204425852,
+          "moment_relative_change": 0.07992457301493382
+        }
+      }
+    ],
+    "rtp_reference_moments_mu1_gamma1": {
+      "mean": 0.0,
+      "second": 0.3333333333333333,
+      "fourth": 0.2
+    }
+  }
+}

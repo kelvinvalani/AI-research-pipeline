@@ -1,0 +1,19 @@
+Matplotlib is building the font cache; this may take a moment.
+Traceback (most recent call last):
+  File "/Users/valani/Documents/AI-research-pipeline/projects/lorenz-active-particle/leads/001-harmonic-alpha-sigma-statistics/work/run_alpha_sigma_sweep.py", line 405, in <module>
+    main()
+    ~~~~^^
+  File "/Users/valani/Documents/AI-research-pipeline/projects/lorenz-active-particle/leads/001-harmonic-alpha-sigma-statistics/work/run_alpha_sigma_sweep.py", line 397, in main
+    summary = run_sweep(profile_config(args.profile))
+  File "/Users/valani/Documents/AI-research-pipeline/projects/lorenz-active-particle/leads/001-harmonic-alpha-sigma-statistics/work/run_alpha_sigma_sweep.py", line 196, in run_sweep
+    signal = _simulate_signal(float(sigma), config)
+  File "/Users/valani/Documents/AI-research-pipeline/projects/lorenz-active-particle/leads/001-harmonic-alpha-sigma-statistics/work/run_alpha_sigma_sweep.py", line 64, in _simulate_signal
+    return simulate_lorenz(
+        SignalConfig(
+    ...<5 lines>...
+        )
+    )
+  File "/Users/valani/Documents/AI-research-pipeline/projects/lorenz-active-particle/leads/001-harmonic-alpha-sigma-statistics/work/lorenz_signal.py", line 130, in simulate_lorenz
+    directions = np.sign(config.sigma * (event_states[:, 1] - event_states[:, 0])).astype(np.int8)
+                                         ~~~~~~~~~~~~^^^^^^
+IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed

@@ -1,0 +1,11 @@
+id: "lorenz-active-particle"
+title: "Deterministic Lorenz Active Particle"
+summary: "Statistical mechanics of a constant-speed one-dimensional active particle driven by deterministic Lorenz reversals."
+domain: "physics-math"
+status: "active"
+created_at: "2026-11-24T15:36:44Z"
+tags:
+  - active-matter
+  - deterministic-chaos
+  - lorenz-system
+  - first-passage

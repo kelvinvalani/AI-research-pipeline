@@ -1,0 +1,157 @@
+{
+  "stage": 3,
+  "status": "genuine_falsification_with_unresolved_sweep",
+  "all_declared_checks_passed": false,
+  "checks": [
+    {
+      "name": "rtp_moments_symbolic_numeric",
+      "passed": true,
+      "message": "second max relerr=2.065e-16; fourth max relerr=2.657e-16",
+      "metrics": {
+        "second": {
+          "name": "rtp_second_moment",
+          "passed": true,
+          "message": "Matched across 6 sample points (max_abs=1.110e-16).",
+          "metrics": {
+            "n_samples": 6,
+            "max_abs_err": 1.1102230246251565e-16,
+            "max_rel_err": 2.0650148258027908e-16
+          }
+        },
+        "fourth": {
+          "name": "rtp_fourth_moment",
+          "passed": true,
+          "message": "Matched across 6 sample points (max_abs=1.110e-16).",
+          "metrics": {
+            "n_samples": 6,
+            "max_abs_err": 1.1102230246251565e-16,
+            "max_rel_err": 2.656985742532924e-16
+          }
+        }
+      }
+    },
+    {
+      "name": "lorenz_xy_inversion",
+      "passed": true,
+      "message": "max_abs_err=0.000e+00, max_rel_err=0.000e+00",
+      "metrics": {
+        "max_abs_err": 0.0,
+        "max_rel_err": 0.0
+      }
+    },
+    {
+      "name": "constant_sign_exact_filter",
+      "passed": true,
+      "message": "max_abs_err=7.772e-16, max_rel_err=7.777e-16",
+      "metrics": {
+        "max_abs_err": 7.771561172376096e-16,
+        "max_rel_err": 7.776543435001761e-16
+      }
+    },
+    {
+      "name": "forward_invariant_support",
+      "passed": true,
+      "message": "maximum normalized support excess=0.000e+00",
+      "metrics": {
+        "support_excess": 0.0
+      }
+    },
+    {
+      "name": "rtp_first_passage_root_and_limits",
+      "passed": true,
+      "message": "small-gamma relerr=1.386e-02, large-gamma abserr=3.943e-02",
+      "metrics": {
+        "theta_small": 0.019722801993503025,
+        "theta_large": 0.9605694463834827
+      }
+    },
+    {
+      "name": "deterministic_replay",
+      "passed": true,
+      "message": "state max error=0.000e+00; crossing max error=0.000e+00",
+      "metrics": {
+        "state_max_error": 0.0,
+        "crossing_max_error": 0.0
+      }
+    },
+    {
+      "name": "ode_tolerance_crossing_times",
+      "passed": true,
+      "message": "9 common crossings; max relative time change=1.574e-09",
+      "metrics": {
+        "common_crossings": 9,
+        "max_relative_change": 1.5739572374347354e-09
+      }
+    },
+    {
+      "name": "fixed_realization_timestep_refinement",
+      "passed": true,
+      "message": "maximum second-moment change=0.063%",
+      "metrics": {
+        "relative_changes": {
+          "0.05": 0.0006258621543531391,
+          "0.25": 0.00013927801401750496,
+          "1.0": 0.0001233437966454427,
+          "5.0": 0.00015977618237610338
+        }
+      }
+    },
+    {
+      "name": "long_run_refinement_and_stationary_falsification",
+      "passed": true,
+      "message": "verified collapse failures at alpha=[0.25, 0.5, 1.0]; unresolved alpha=[0.05, 0.1]",
+      "metrics": {
+        "falsified_alphas": [
+          0.25,
+          0.5,
+          1.0
+        ],
+        "unresolved_alphas": [
+          0.05,
+          0.1
+        ]
+      }
+    },
+    {
+      "name": "relaxation_convergence_and_tail_model_classification",
+      "passed": true,
+      "message": "relaxation/FPT numerical exponents converge within 5%; first-passage exponential rejected (threshold-rate spread=17.4%)",
+      "metrics": {
+        "exponent_relative_changes": {
+          "relaxation_origin_rate": 0.012248719215918236,
+          "relaxation_half_edge_rate": 0.02732232742672213,
+          "first_passage_rate": 0.0005450174742956258
+        },
+        "tail_rate_spread": 0.17427724855974097
+      }
+    },
+    {
+      "name": "full_sweep_density_modality_and_convergence",
+      "passed": false,
+      "message": "unresolved: long-record refinement covers sigma=sqrt(50) only; modality remains estimator-sensitive at alpha=[1.0], and other reversing sigma points are unrefined",
+      "metrics": {
+        "refined_sigma": [
+          7.0710678118654755
+        ],
+        "unrefined_reversing_sigma": [
+          10.0,
+          11.530715390799683,
+          14.724544808607865
+        ],
+        "unstable_modality_alphas": [
+          1.0
+        ]
+      }
+    }
+  ],
+  "evidence_runs": {
+    "refinement": "20261125T093355Z",
+    "decisive": "20261125T093718Z",
+    "tail": "20261125T094642Z"
+  },
+  "rtp_reference_moments_mu1_gamma1": {
+    "mean": 0.0,
+    "second": 0.3333333333333333,
+    "fourth": 0.2
+  }
+}

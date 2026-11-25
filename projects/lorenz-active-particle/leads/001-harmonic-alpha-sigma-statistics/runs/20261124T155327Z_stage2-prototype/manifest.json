@@ -1,0 +1,25 @@
+{
+  "run_id": "20261124T155327Z_stage2-prototype",
+  "lead_id": "001-harmonic-alpha-sigma-statistics",
+  "project_id": "lorenz-active-particle",
+  "tag": "stage2-prototype",
+  "command": [
+    "python",
+    "work/run_alpha_sigma_sweep.py",
+    "--profile",
+    "prototype"
+  ],
+  "seed": 42,
+  "executor": "local",
+  "started_at": "2026-11-24T15:53:27Z",
+  "finished_at": "2026-11-24T15:54:07Z",
+  "duration_sec": 40.6188,
+  "exit_code": 1,
+  "timed_out": false,
+  "git_sha": "04a41870037e",
+  "git_dirty": true,
+  "python_version": "3.14.7",
+  "run_dir": "runs/20261124T155327Z_stage2-prototype",
+  "summary_file": null,
+  "summary": null
+}

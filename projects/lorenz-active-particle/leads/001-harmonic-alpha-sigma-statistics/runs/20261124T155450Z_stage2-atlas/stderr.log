@@ -1,0 +1,8 @@
+/Users/valani/Documents/AI-research-pipeline/.venv/lib/python3.14/site-packages/numpy/_core/fromnumeric.py:3862: RuntimeWarning: Mean of empty slice
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/Users/valani/Documents/AI-research-pipeline/.venv/lib/python3.14/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/Users/valani/Documents/AI-research-pipeline/projects/lorenz-active-particle/leads/001-harmonic-alpha-sigma-statistics/work/first_passage_statistics.py:107: RuntimeWarning: divide by zero encountered in log
+  local_rate[valid] = -np.diff(np.log(symmetric))[valid] / np.diff(grid)[valid]
+/Users/valani/Documents/AI-research-pipeline/.venv/lib/python3.14/site-packages/numpy/lib/_function_base_impl.py:1541: RuntimeWarning: invalid value encountered in subtract
+  a = op(a[slice1], a[slice2])

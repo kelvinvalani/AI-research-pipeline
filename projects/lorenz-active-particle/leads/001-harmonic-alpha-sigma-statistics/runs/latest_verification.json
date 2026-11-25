@@ -1,0 +1,40 @@
+{
+  "lead_id": "001-harmonic-alpha-sigma-statistics",
+  "project_id": "lorenz-active-particle",
+  "checked_at": "2026-11-25T09:48:41Z",
+  "passed": false,
+  "outcomes": [
+    {
+      "name": "lead-schema",
+      "kind": "schema",
+      "status": "passed",
+      "duration_sec": 0.0,
+      "message": "lead.yaml conforms to LeadSpec schema.",
+      "details": {}
+    },
+    {
+      "name": "pytest",
+      "kind": "pytest",
+      "status": "passed",
+      "duration_sec": 3.5172,
+      "message": "........                                                                 [100%]",
+      "details": {}
+    },
+    {
+      "name": "scientific-statistics",
+      "kind": "custom",
+      "status": "failed",
+      "duration_sec": 15.8385,
+      "message": "",
+      "details": {}
+    },
+    {
+      "name": "lead-tests",
+      "kind": "custom",
+      "status": "passed",
+      "duration_sec": 2.4356,
+      "message": "........                                                                 [100%]",
+      "details": {}
+    }
+  ]
+}

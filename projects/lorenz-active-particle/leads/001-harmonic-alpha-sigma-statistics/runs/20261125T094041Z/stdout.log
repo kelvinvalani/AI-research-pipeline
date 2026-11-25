@@ -1,0 +1,14 @@
+......F.                                                                 [100%]
+=================================== FAILURES ===================================
+___________________ test_rtp_first_passage_asymptotic_limits ___________________
+
+    def test_rtp_first_passage_asymptotic_limits() -> None:
+        theta_small = rtp_first_passage_rate(1.0, 0.02)
+        theta_large = rtp_first_passage_rate(1.0, 50.0)
+        assert theta_small is not None
+>       assert theta_large is not None
+E       assert None is not None
+
+work/test_harmonic_lorenz.py:77: AssertionError
+=========================== short test summary info ============================
+FAILED work/test_harmonic_lorenz.py::test_rtp_first_passage_asymptotic_limits
